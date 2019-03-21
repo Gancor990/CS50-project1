@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="container">
+    {% for book in results %}
+        <article class="card-lg-4 col-12">
+            <div class="card-body">
+                <h4 class="card-title">{{ book.title }}</h4>
+                <h6 class="card-subtitle text-muted mb-1">{{ book.author }}</h6>
+                <h6 class="card-subtitle text-muted mb2">{{ book.year }}</h6>
+            </div>
+        </article>
+        {% else %}
+        <div class="alert alert-danger col-12">
+            <h4 class="alert-heading text-center">Error 404</h4>
+            <p class="text-center">There are no results for your search, please try again</p>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock content %}
