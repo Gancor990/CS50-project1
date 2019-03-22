@@ -8,7 +8,7 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 # importing hashed password funcs
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from forms import RegistrationForm, LoginForm, BookSearch
+from forms import RegistrationForm, LoginForm, BookSearch, ReviewForm
 
 app = Flask(__name__)
 
@@ -135,6 +135,34 @@ def search():
                     {"book_title": book_title, "isbn": isbn, "author": author}).fetchall()
         return render_template('results.html', title="Search results", results=book_res)
     return render_template('search.html', title="Book search", form=form)
+
+
+@app.route("/bookdetail/<string:book_id>", methods=["GET", "POST"])
+def bookdetail(book_id):
+    form = ReviewForm()
+    query_isbn = f"%{book_id}%".lower()
+    
+    book_res = db.execute("SELECT * FROM books WHERE isbn LIKE :isbn LIMIT 1",{"isbn": query_isbn}).fetchone()
+
+    existing_review = db.execute("SELECT * FROM reviews WHERE user_id = :user_id AND isbn LIKE :isbn LIMIT 1",
+        {"user_id": session["user_id"], "isbn": query_isbn}).fetchone()
+
+    if existing_review:
+
+        return render_template('bookdetail.html', book=book_res, review=existing_review)
+
+    if form.validate_on_submit():
+
+        rating = form.rating.data
+        review = form.review.data
+
+        db.execute(
+            "INSERT INTO reviews (user_id, rating, review, isbn) VALUES (:user_id, :rating, :review, :isbn)",
+            {"user_id": session["user_id"], "rating": rating, "review": review, "isbn": query_isbn })
+        
+        db.commit()
+
+    return render_template('bookdetail.html', book=book_res, form=form)
 
 if __name__ == '__main__':
     app.run(debug=True)

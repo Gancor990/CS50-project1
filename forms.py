@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, RadioField, TextAreaField
 from wtforms.validators import DataRequired, Length, Email, EqualTo
 
 class RegistrationForm(FlaskForm):
@@ -20,3 +20,8 @@ class BookSearch(FlaskForm):
     title = StringField('Title')
     author = StringField('Author')
     submit = SubmitField('Search')
+
+class ReviewForm(FlaskForm):
+    rating = RadioField('Rating', choices = [('1','1'),('2','2'),('3','3'),('4','4'),('5','5')])
+    review = TextAreaField('Submit Review', validators=[Length(min=5, max=200)])
+    submit = SubmitField('Submit')

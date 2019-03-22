@@ -36,8 +36,9 @@
     </style>
     <div class="container">
     {% for book in results %}
+
         <article class="card-lg-4 col-12">
-            <div class="card-body">
+            <a style="text-decoration: none;" href = "{{ url_for('bookdetail', book_id=book.isbn) }}"><div class="card-body">
                 <h4 class="card-title"><i class="fas fa-book"></i> {{ book.title }}</h4>
                 <h6 class="card-subtitle text-muted mb-1">
                 <table>
@@ -53,6 +54,7 @@
                 </table>
                 </h6>
             </div>
+            </a>
         </article>
         {% else %}
         <div class="alert alert-danger col-12">
