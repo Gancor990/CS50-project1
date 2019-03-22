@@ -73,7 +73,7 @@ def login():
 
         elif db.execute("SELECT * FROM users WHERE email = :email", {"email": email}).rowcount == 1:
             if check_password_hash(db_hash, password):
-                flash(f"Logged in as {form.email.data}!", 'success')
+                flash(f"Logged in as {username}!", 'success')
 
                 session["logged_in"] = True
                 session["user_id"] = user_id
@@ -135,5 +135,7 @@ def search():
                     {"book_title": book_title, "isbn": isbn, "author": author}).fetchall()
         return render_template('results.html', title="Search results", results=book_res)
     return render_template('search.html', title="Book search", form=form)
+
 if __name__ == '__main__':
     app.run(debug=True)
+

@@ -1,5 +1,10 @@
 {% extends "layout.html" %}
 {% block content %}
+    <style>
+        .content-section {
+            box-shadow: 2px 2px 6px black;
+        }
+    </style>
     <div class="content-section">
         <form method="POST" action="">
             {{ form.hidden_tag() }}
@@ -19,7 +24,7 @@
                 </div>
             </fieldset>
             <div class="form-group">
-                {{ form.submit(class="btn btn-outline-success") }}
+                {{ form.submit(class="btn btn-orange") }}
             </div>
         </form>
     </div>

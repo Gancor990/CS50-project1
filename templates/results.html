@@ -1,12 +1,57 @@
 {% extends "layout.html" %}
 {% block content %}
+
+    <style>
+        .card-body {
+            border: solid 1px lightgray;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            background-color: white;
+            /*box-shadow: 2px 2px 6px #888888;*/
+            box-shadow: 2px 2px 6px black;
+        }
+        .card-body:hover {
+            background-color: #DCDCDC;
+        }
+        .tdata {
+            padding-left: 20px;
+        }
+        .fa-book {
+            padding-right: 20px;
+            padding-bottom: 5px;
+            /*color: #6a8d73;*/
+            color: #cd431e;
+        }
+        body {
+            background-image: linear-gradient(rgba(0, 0, 0, 0),rgba(0, 0, 0, 0)), url("../static/backgroundimg.jpg");
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        .content-section {
+            box-shadow: 2px 2px 6px black;
+        }
+    </style>
     <div class="container">
     {% for book in results %}
         <article class="card-lg-4 col-12">
             <div class="card-body">
-                <h4 class="card-title">{{ book.title }}</h4>
-                <h6 class="card-subtitle text-muted mb-1">{{ book.author }}</h6>
-                <h6 class="card-subtitle text-muted mb2">{{ book.year }}</h6>
+                <h4 class="card-title"><i class="fas fa-book"></i> {{ book.title }}</h4>
+                <h6 class="card-subtitle text-muted mb-1">
+                <table>
+                    <tr>
+                        <td>Author: </td><td class="tdata">{{ book.author }}</td>
+                    </tr>
+                    <tr>
+                        <td>Published: </td><td class="tdata">{{ book.year }}</td>
+                    </tr>
+                    <tr>
+                        <td>ISBN: </td><td class="tdata">{{ book.isbn }}</td>
+                    </tr>
+                </table>
+                </h6>
             </div>
         </article>
         {% else %}

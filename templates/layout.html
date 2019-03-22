@@ -7,9 +7,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         
         <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.0/css/all.css" integrity="sha384-Mmxa0mLqhmOeaE8vgOSbKacftZcsNYDjQzuCOm6D02luYSzBG8vpaOykv9lFQ51Y" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="../static/main.css"">
+
+        <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet"> 
+
 
         {% if title %}
             <title>{{ title }}</title>
@@ -18,31 +22,34 @@
         {% endif %}
     </head>
     <body>
-        <header class="site-header">
+        <header class="site-header" style="padding-bottom: 60px;">
             <nav class="navbar navbar-expand-md navbar-dark bg-color fixed-top">
             <div class="container">
-                <a class="navbar-brand mr-4" href="/">Gancor990 / CS50 / Project1</a>
+                <a class="navbar-brand mr-4" href="/"><img class="logo" src="./static/bookslogo.png"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarToggle">
                     <div class="navbar-nav mr-auto">
-                        <a class="nav-item nav-link" href="/">Home</a>
+                        <a class="nav-item nav-link" href="/"><i class="fas fa-home"></i></span> Home</a>
+                        {% if session.get('logged_in') %}
+                        <a class="nav-item nav-link" href="/search"><i class="fas fa-search"></i> Search</a>
+                        {% endif %}
                     </div>
                     <!-- Navbar Right Side -->
                     <div class="navbar-nav">
                         {% if session.get('logged_in') %}
-                        <a class="nav-item nav-link" href="/logout">Logout</a>
+                        <a class="nav-item nav-link" href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
                         {% else %}
-                        <a class="nav-item nav-link" href="/login">Login</a>
-                        <a class="nav-item nav-link" href="/register">Register</a>
+                        <a class="nav-item nav-link" href="/login"><i class="fas fa-sign-in-alt"></i> Login</a>
+                        <a class="nav-item nav-link" href="/register"><i class="fas fa-user-plus"></i> Register</a>
                         {% endif %} 
                     </div>
                 </div>
             </div>
             </nav>
         </header>
-        <main role="main" class="container">
+        <main role="main" class="container" style="padding-left: 100px;">
             <div class="row">
                 <div class="col-md-8">
                     {% with messages = get_flashed_messages(with_categories=true) %}
@@ -62,13 +69,24 @@
                         <h3>Options</h3>
                         <p class='text-muted'>Start by searching for your book
                         <ul class="list-group">
-                            <a href="/search"><button type="button" class="btn btn-outline-success btn-lg">Book Search</li></button></a>
+                            <a href="/search"><button type="button" class="btn btn-md">Book Search</li></button></a>
                         </ul>
                         </p>
                     </div>
                 </div>
+                {% else %}
+                <div class="col-md-4">
+                        <div class="content-section">
+                            <h3>Options</h3>
+                            <p class='text-muted'>Please login or register to access search
+                            </p>
+                        </div>
+                    </div>
                 {% endif %}
             </div>
+            <!--<div id="footer">
+                    <a style="font-size: 15px;"><i class="fab fa-github-square" style="font-size: 20px;"></i> Gancor990 / CS50 / Project1</a>
+            </div>-->
         </main>
 
         <!-- Optional JavaScript -->

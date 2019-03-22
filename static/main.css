@@ -1,107 +1,98 @@
 body {
-    background: #fafafa;
     color: #333333;
     margin-top: 5rem;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.1),rgba(0, 0, 0, 0.3)), url("../static/backgroundimg.jpg");
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
   }
+
   
   h1, h2, h3, h4, h5, h6 {
     color: #444444;
   }
   
   .bg-color {
-    background-color: #43874d
+    background-color: #013c4d;
+
   }
   
   .site-header .navbar-nav .nav-link {
-    color: #cbd5db;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    color: #cd431e;
+    font-size: 20px;
+    font-weight: 500;
+
   }
   
   .site-header .navbar-nav .nav-link:hover {
-    color: #ffffff;
-  }
-  
-  .site-header .navbar-nav .nav-link.active {
-    font-weight: 500;
+    color: #F8F8F7;
   }
   
   .content-section {
-    background: #ffffff;
+    background: white;
     padding: 10px 20px;
     border: 1px solid #dddddd;
-    border-radius: 3px;
+    border-radius: 10px;
     margin-bottom: 20px;
+    box-shadow: 2px 2px 6px #888888;
+  }
+
+  .logo {
+    width: 150px;
+    height: auto;
   }
   
-  .article-title {
-    color: #444444;
+  .btn-md {
+    background-color: #cd431e;
+    color: white;
+  }
+
+  .btn-md:hover {
+    background-color: #c16513;
   }
   
-  a.article-title:hover {
-    color: #428bca;
-    text-decoration: none;
+  .btn-orange {
+    background-color: #cd431e;
+    color: white; 
   }
-  
-  .article-content {
-    white-space: pre-line;
-  }
-  
-  .article-img {
-    height: 65px;
-    width: 65px;
-    margin-right: 16px;
-  }
-  
-  .article-metadata {
-    padding-bottom: 1px;
-    margin-bottom: 4px;
-    border-bottom: 1px solid #e3e3e3
-  }
-  
-  .article-metadata a:hover {
-    color: #333;
-    text-decoration: none;
-  }
-  
-  .article-svg {
-    width: 25px;
-    height: 25px;
-    vertical-align: middle;
-  }
-  
-  .account-img {
-    height: 125px;
-    width: 125px;
-    margin-right: 20px;
-    margin-bottom: 16px;
-  }
-  
-  .account-heading {
-    font-size: 2.5rem;
+  .btn-orange:hover {
+    background-color: #c16513;
   }
 
   .container1 {
+    height: 100%;
     position: relative;
     text-align: center;
   }
 
-  #mainimg {
-    max-width: 800px;
-    min-width:440px;
-    width: 100%;
-    height: auto;
-    border: 1px solid black;
-  }
-
   .imagetext {
-    position: absolute;
-    top: 50%;
-    left: 50%;
+
+    border-radius: 10px;
     color: white;
-    background-color: rgba(0,0,0,.7);
-    padding: 15px;
+    background-color: rgba(0,0,0,1);
+    padding: 30px;
+    padding-bottom: 40px;
     text-align: left;
-    max-width: 75%;
+    max-width: 100%;
     min-width: 300px;
     font-size: 12px;
-    transform: translate(-50%, -50%)
+
+
   }
+
+  #footer {
+    position: fixed;
+    padding-top: 5px;
+    height: 40px;
+    background-color: #5b6c5d;;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin-bottom: 0px;
+    text-align: center;
+    color: black;
+}
