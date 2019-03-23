@@ -1,6 +1,6 @@
 # Project 1
 
-:briefcase: Harvard CS50 - Web Programming with Python and JavaScript
+### :briefcase: Harvard CS50 - Web Programming with Python and JavaScript
 
 Project utilising Python Flask and SQLAlchemy to create a dymanic site consisting of a database of books with implementation of Goodreads API.
 
