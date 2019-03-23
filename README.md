@@ -4,7 +4,7 @@
 
 Project utilising Python Flask and SQLAlchemy to create a dymanic site consisting of a database of books with implementation of Goodreads API.
 
-### :tasklist: Requirements
+### :page_facing_up: Requirements
 
  - [x] Registration - users can register with website (password hashed with SHA256)
 
@@ -24,6 +24,7 @@ Project utilising Python Flask and SQLAlchemy to create a dymanic site consistin
 
  - [x] API Access - GET request available with /api/<isbn> returning a JSON response in following format:
 
+```
 {
     "title": "Memory",
     "author": "Doug Lloyd",
@@ -32,8 +33,9 @@ Project utilising Python Flask and SQLAlchemy to create a dymanic site consistin
     "review_count": 28,
     "average_score": 5.0
 }
+```
 
-### :paintcan: Screenshots
+### :framed_picture: Screenshots
 
 #### Welcome page
 ----------------
