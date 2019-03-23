@@ -1,6 +1,6 @@
-import os
+import os, requests
 
-from flask import Flask, session, render_template, url_for, flash, redirect
+from flask import Flask, session, render_template, url_for, flash, redirect, jsonify, request
 from flask_session import Session
 from sqlalchemy import create_engine, exists
 from sqlalchemy.orm import scoped_session, sessionmaker
@@ -16,7 +16,7 @@ app.config['SECRET_KEY'] = '9db738effd3cd1d8c911b53b5e245cd4'
 
 # Check for environment variable
 #if not os.getenv("DATABASE_URL"):
-#    raise RuntimeError("DATABASE_URL is not set")
+#raise RuntimeError("DATABASE_URL is not set")
 
 # Configure session to use filesystem
 app.config["SESSION_PERMANENT"] = False
@@ -144,12 +144,17 @@ def bookdetail(book_id):
     
     book_res = db.execute("SELECT * FROM books WHERE isbn LIKE :isbn LIMIT 1",{"isbn": query_isbn}).fetchone()
 
-    existing_review = db.execute("SELECT * FROM reviews WHERE user_id = :user_id AND isbn LIKE :isbn LIMIT 1",
-        {"user_id": session["user_id"], "isbn": query_isbn}).fetchone()
+    existing_review = db.execute("SELECT * FROM reviews WHERE isbn = :isbn",{"isbn": query_isbn}).fetchone()
+
+    goodreads_request = requests.get("https://www.goodreads.com/book/review_counts.json", params={"key": "6vsh1pJmzHPFQE7G6jppw", "isbns": book_id})
+  
+    info = goodreads_request.json()
+    goodreads_rating = float(info['books'][0]['average_rating'])
+    goodreads_rating_num = int(info['books'][0]['ratings_count'])
 
     if existing_review:
 
-        return render_template('bookdetail.html', book=book_res, review=existing_review)
+        return render_template('bookdetail.html', book=book_res, review=existing_review, goodreads_rating=goodreads_rating, rating_num=goodreads_rating_num)
 
     if form.validate_on_submit():
 
@@ -157,12 +162,39 @@ def bookdetail(book_id):
         review = form.review.data
 
         db.execute(
-            "INSERT INTO reviews (user_id, rating, review, isbn) VALUES (:user_id, :rating, :review, :isbn)",
-            {"user_id": session["user_id"], "rating": rating, "review": review, "isbn": query_isbn })
+            "INSERT INTO reviews (user_name, rating, review, isbn) VALUES (:user_name, :rating, :review, :isbn)",
+            {"user_name": session["user_name"], "rating": rating, "review": review, "isbn": query_isbn })
         
         db.commit()
 
-    return render_template('bookdetail.html', book=book_res, form=form)
+    return render_template('bookdetail.html', book=book_res, form=form, goodreads_rating=goodreads_rating)
+
+@app.route("/api/<isbn>", methods=["GET"])
+def apicall(isbn):
+    """Return details about a book"""
+
+    goodreads_request = requests.get("https://www.goodreads.com/book/review_counts.json", params={"key": "6vsh1pJmzHPFQE7G6jppw", "isbns": isbn})
+  
+    info = goodreads_request.json()
+    goodreads_rating = float(info['books'][0]['average_rating'])
+    goodreads_rating_num = int(info['books'][0]['ratings_count'])
+
+    query_isbn = f"%{isbn}%".lower()
+
+    book = db.execute("SELECT * FROM books WHERE isbn LIKE :isbn LIMIT 1",{"isbn": query_isbn}).fetchone()
+
+    if book is None:
+        return jsonify({"error": "Invalid book ISBN"}), 422
+    else:
+        response = {
+            "title": book.title, 
+            "author": book.author, 
+            "year": book.year, 
+            "isbn": book.isbn,
+            "review_count": goodreads_rating,
+            "average_score": goodreads_rating_num
+        }
+        return jsonify(response)
 
 if __name__ == '__main__':
     app.run(debug=True)

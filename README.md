@@ -8,23 +8,23 @@ Project utilising Python Flask and SQLAlchemy to create a dymanic site consistin
 
 ### Requirements
 
- [x] Registration - users can register with website (password hashed with SHA256)
+ - [x] Registration - users can register with website (password hashed with SHA256)
 
- [x] Login - users can login with credentials
+ - [x] Login - users can login with credentials
 
- [x] Logout - users can log out of site
+ - [x] Logout - users can log out of site
 
- [x] Import - imports book CSV into PostgreSQL database
+ - [x] Import - imports book CSV into PostgreSQL database
 
- [x] Search - can search for book based on ISBN, title and author with matches, if any, displayed
+ - [x] Search - can search for book based on ISBN, title and author with matches, if any, displayed
 
- [ ] Book Page - contains book details and user reviews
+ - [ ] Book Page - contains book details and user reviews
 
- [ ] Review Submission - contained within book page if user has not yet left a review
+ - [x] Review Submission - contained within book page if user has not yet left a review
 
- [ ] Goodreads Review Data - 
+ - [x] Goodreads Review Data - return Goodreads average rating and number of ratings via API call
 
- [ ] API Access - GET request available with /api/<isbn> returning a JSON response in following format:
+ - [x] API Access - GET request available with /api/<isbn> returning a JSON response in following format:
 
     {
         "title": "Memory",

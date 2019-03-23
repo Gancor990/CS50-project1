@@ -2,18 +2,22 @@
 {% block content %}
     <style>
     .jumbotron {
-        box-shadow: 0 8px 8px -6px black;
-        background-color: #c0cfe8;
+        box-shadow: 2px 2px 6px black;
+        background-color: white;
         text-align: center;
         padding-top: 25px;
         padding-bottom: 20px;
+        border-radius: 10px;
+    }
+    .logout {
+        color: grey;
     }
     </style>
     <div class="container">
         <div class="row">
         <div class="col-lg-12">
             <div class="jumbotron">
-                <h3>You have been logged out!</h3>
+                <h3 class="logout">You have been logged out!</h3>
                 <p>Click <a href="/home">here</a> to return to home</p>
             </div>
         </div>

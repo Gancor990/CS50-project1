@@ -29,6 +29,9 @@
             <td>ISBN: </td><td class="tdata">{{ book.isbn }}</td>
         </tr>
     </table>
+    <h5>Goodreads rating</h5>
+        <p>The average rating on Goodsreads is {{ goodreads_rating }}</p>
+        <p>This is the average rating of {{ rating_num }} user ratings</p>
     {% if review %}
     <h5>Your rating</h5>
         <p>{% for i in range(0,review.rating) %} 
