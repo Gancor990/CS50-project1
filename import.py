@@ -11,7 +11,9 @@ engine = create_engine("postgres://jffkwmeunskbbw:e8549f0b2c6670317d16aa9b98fda2
 db = scoped_session(sessionmaker(bind=engine))
 
 def main():
-
+    """
+    Imports books.csv into PostgreSQL database
+    """
     f = open("books.csv")
     reader = csv.reader(f)
 

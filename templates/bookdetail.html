@@ -10,10 +10,10 @@
         font-size: 20px;
         letter-spacing: 10px;
     }
-
-
+    .iconcolor {
+        color: #cd431e;
+    }
 </style>
-
 <div class="content-section">
     <h3>Book Details</h3>
     <h4 class="card-title"> {{ book.title }}</h4>
@@ -29,11 +29,11 @@
             <td>ISBN: </td><td class="tdata">{{ book.isbn }}</td>
         </tr>
     </table>
-    <h5>Goodreads rating</h5>
+    <h5><i class="fab fa-goodreads iconcolor"></i> Goodreads rating</h5>
         <p>The average rating on Goodsreads is {{ goodreads_rating }}</p>
         <p>This is the average rating of {{ rating_num }} user ratings</p>
     {% if review %}
-    <h5>Your rating</h5>
+    <h5><i class="fas fa-user iconcolor"></i> Your rating</h5>
         <p>{% for i in range(0,review.rating) %} 
             <i class="fas fa-star"></i>
             {% endfor %}
@@ -61,9 +61,10 @@
         </div>
     </form>
     {% endif %}
+    <h5><i class="fas fa-users iconcolor"></i> Other Books user reviews</h5>
+    {% for reviews in other_users %}
+        <h6><i class="fas fa-user"></i> {{ reviews.user_name }}</h6>
+        <p>{{ reviews.review }}</p>
+    {% endfor %}
 </div>
-
-
-
-
 {% endblock content %}
