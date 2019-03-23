@@ -6,11 +6,11 @@ Web Programming with Python and JavaScript
 
 Project utilising Python Flask and SQLAlchemy to create a dymanic site consisting of a database of books with implementation of Goodreads API.
 
-# Welcome page
+## Welcome page
 ![](https://i.imgur.com/GyBhLH1.png)
 
-# Registration
+## Registration
 ![](https://i.imgur.com/T4QjnPv.png)
 
-# Book search
+## Book search
 ![](https://i.imgur.com/4e8rile.png)
