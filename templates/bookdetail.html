@@ -1,22 +1,19 @@
 {% extends "layout.html" %}
 {% block content %}
 <style>
-    .tdata {
-        padding-left: 20px;
+    h5 {
+        padding-bottom: 10px;
     }
-    .radios {
-        list-style: none;
-        padding-left: 20px;
-        font-size: 20px;
-        letter-spacing: 10px;
+    .contentp {
+        padding-left: 40px;;
+        font-size: 15px;
     }
-    .iconcolor {
-        color: #cd431e;
+    #sectiontitle {
+        text-align:center;
     }
 </style>
 <div class="content-section">
-    <h3>Book Details</h3>
-    <h4 class="card-title"> {{ book.title }}</h4>
+    <h3>Book Details -<a id="titlecolor"> {{ book.title }}</a></h3>
     <h6 class="card-subtitle text-muted mb-1">
     <table>
         <tr>
@@ -29,17 +26,17 @@
             <td>ISBN: </td><td class="tdata">{{ book.isbn }}</td>
         </tr>
     </table>
-    <h5><i class="fab fa-goodreads iconcolor"></i> Goodreads rating</h5>
-        <p>The average rating on Goodsreads is {{ goodreads_rating }}</p>
-        <p>This is the average rating of {{ rating_num }} user ratings</p>
+    <h5><i class="fab fa-goodreads iconcolor"></i> Goodreads rating</a></h5>
+        <p class="contentp">The average rating on Goodsreads is {{ goodreads_rating }}</p>
+        <p class="contentp">This is the average rating of {{ rating_num }} user ratings</p>
     {% if review %}
     <h5><i class="fas fa-user iconcolor"></i> Your rating</h5>
-        <p>{% for i in range(0,review.rating) %} 
+        <p class="contentp">{% for i in range(0,review.rating) %} 
             <i class="fas fa-star"></i>
             {% endfor %}
         </p>
-    <h5>Review</h5>
-        <p>{{ review.review }}</p>
+    <h5><i class="fas fa-comment-alt iconcolor"></i> Your review</h5>
+        <p class="contentp">{{ review.review }}</p>
     {% else %}
     <form method="POST" action="">
         {{ form.hidden_tag() }}
@@ -63,8 +60,8 @@
     {% endif %}
     <h5><i class="fas fa-users iconcolor"></i> Other Books user reviews</h5>
     {% for reviews in other_users %}
-        <h6><i class="fas fa-user"></i> {{ reviews.user_name }}</h6>
-        <p>{{ reviews.review }}</p>
+        <h6 style="padding-left: 30px;"><i class="fas fa-user"></i>&nbsp&nbsp{{ reviews.user_name }} says:</h6>
+        <p class="contentp">{{ reviews.review }}</p>
     {% endfor %}
 </div>
 {% endblock content %}

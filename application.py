@@ -28,9 +28,6 @@ db = scoped_session(sessionmaker(bind=engine))
 @app.route("/")
 @app.route("/home")
 def index():
-    if not session.get('logged_in'):
-        return render_template('welcome.html')
-    else:
         return render_template('home.html', username=session["user_name"])
 
 # registration route
